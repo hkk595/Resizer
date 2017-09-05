@@ -1,7 +1,9 @@
 # Resizer
-[![](https://jitpack.io/v/hkk595/Resizer.svg)](https://jitpack.io/#hkk595/Resizer)
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Resizer-green.svg?style=flat)](https://android-arsenal.com/details/1/6155) [![](https://jitpack.io/v/hkk595/Resizer.svg)](https://jitpack.io/#hkk595/Resizer)
 
-Inspired by zetbaitsu's [Compressor](https://github.com/zetbaitsu/Compressor), Resizer is a lightweight and easy-to-use Android library for image resizing. It allows you to create a smaller or bigger image from the original image while keeping the aspect ratio.
+<p align="center"><img width="50%" height="auto" src="https://raw.githubusercontent.com/hkk595/Resizer/master/app/src/main/res/drawable/library_logo.png"/></p>
+
+Inspired by zetbaitsu's [Compressor](https://github.com/zetbaitsu/Compressor), Resizer is a lightweight and easy-to-use Android library for image scaling. It allows you to resize an image file to a smaller or bigger one while keeping the aspect ratio.
 
 #### Include Resizer into your project
 1. Add the JitPack repository to your top-level build.gradle at the end of repositories
@@ -15,7 +17,7 @@ allprojects {
 2. Add the dependency in your module-level build.gradle
 ```groovy
 dependencies {
-    compile 'com.github.hkk595:Resizer:v1.0'
+    compile 'com.github.hkk595:Resizer:v1.1'
 }
 ```
 
