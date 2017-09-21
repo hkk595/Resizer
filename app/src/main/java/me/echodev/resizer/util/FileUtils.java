@@ -11,7 +11,7 @@ import java.io.IOException;
  */
 
 public class FileUtils {
-    public static String getDestinationFilePath(Bitmap.CompressFormat compressFormat, String destinationDirPath, File sourceImage) {
+    public static String getDestinationFilePath(Bitmap.CompressFormat compressFormat, String outputDirPath, File sourceImage) {
         String originalFileName = sourceImage.getName();
         String targetFileName;
         String targetFileExtension = "." + compressFormat.name().toLowerCase().replace("jpeg", "jpg");
@@ -23,7 +23,7 @@ public class FileUtils {
             targetFileName = originalFileName.substring(0, extensionIndex) + targetFileExtension;
         }
 
-        return destinationDirPath + File.separator + targetFileName;
+        return outputDirPath + File.separator + targetFileName;
     }
 
     public static void writeBitmapToFile(Bitmap bitmap, Bitmap.CompressFormat compressFormat, int quality, String filePath) throws IOException {

@@ -17,7 +17,7 @@ allprojects {
 2. Add the dependency in your module-level build.gradle
 ```groovy
 dependencies {
-    compile 'com.github.hkk595:Resizer:v1.1'
+    compile 'com.github.hkk595:Resizer:v1.2'
 }
 ```
 
@@ -27,7 +27,7 @@ File resizedImage = new Resizer(this)
         .setTargetLength(1080)
         .setQuality(80)
         .setOutputFormat("JPEG")
-        .setDestinationDirPath(storagePath)
+        .setOutputDirPath(storagePath)
         .setSourceImage(originalImage)
         .getResizedFile();
 ```
@@ -47,7 +47,7 @@ new Resizer(this)
         .setTargetLength(1080)
         .setQuality(80)
         .setOutputFormat("JPEG")
-        .setDestinationDirPath(storagePath)
+        .setOutputDirPath(storagePath)
         .setSourceImage(originalImage)
         .getResizedFileAsFlowable()
         .subscribeOn(Schedulers.io())
@@ -87,11 +87,13 @@ new Resizer(this)
 Note: You don't need to declare the new image as final nor array if it is an instance variable of the class, instead of a local variable in a function.
 
 #### Library specification
+    Minimum SDK: API 21
+     
     Default settings:
     targetLength: 1080
     quality: 80
     outputFormat: JPEG
-    destinationDirPath: the external files directory of your app
+    outputDirPath: the external files directory of your app
      
     Supported input formats:
     BMP
@@ -105,9 +107,8 @@ Note: You don't need to declare the new image as final nor array if it is an ins
     PNG
     WEBP
      
-    Supported quality range:
-    0~100
-    The higher number the better in image quality and larger in file size
+    Supported quality range: 0~100
+    The higher value, the better image quality but larger file size
     PNG, which is a lossless format, will ignore the quality setting
 
 ## License

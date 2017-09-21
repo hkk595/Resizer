@@ -18,14 +18,14 @@ import me.echodev.resizer.util.ImageUtils;
 public class Resizer {
     private int targetLength, quality;
     private Bitmap.CompressFormat compressFormat;
-    private String destinationDirPath;
+    private String outputDirPath;
     private File sourceImage;
 
     public Resizer(Context context) {
         targetLength = 1080;
         quality = 80;
         compressFormat = Bitmap.CompressFormat.JPEG;
-        destinationDirPath = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES).getAbsolutePath();
+        outputDirPath = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES).getAbsolutePath();
     }
 
     public Resizer setTargetLength(int targetLength) {
@@ -53,8 +53,8 @@ public class Resizer {
         return this;
     }
 
-    public Resizer setDestinationDirPath(String destinationDirPath) {
-        this.destinationDirPath = destinationDirPath;
+    public Resizer setOutputDirPath(String outputDirPath) {
+        this.outputDirPath = outputDirPath;
         return this;
     }
 
@@ -64,7 +64,7 @@ public class Resizer {
     }
 
     public File getResizedFile() throws IOException {
-        return ImageUtils.getScaledImage(targetLength, quality, compressFormat, destinationDirPath, sourceImage);
+        return ImageUtils.getScaledImage(targetLength, quality, compressFormat, outputDirPath, sourceImage);
     }
 
     public Bitmap getResizedBitmap() throws IOException {

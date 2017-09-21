@@ -11,14 +11,14 @@ import java.io.IOException;
  */
 
 public class ImageUtils {
-    public static File getScaledImage(int targetLength, int quality, Bitmap.CompressFormat compressFormat, String destinationDirPath, File sourceImage) throws IOException {
-        File file = new File(destinationDirPath);
-        if (!file.exists()) {
-            file.mkdirs();
+    public static File getScaledImage(int targetLength, int quality, Bitmap.CompressFormat compressFormat, String outputDirPath, File sourceImage) throws IOException {
+        File directory = new File(outputDirPath);
+        if (!directory.exists()) {
+            directory.mkdirs();
         }
 
         // Prepare the new file name and path
-        String destinationFilePath = FileUtils.getDestinationFilePath(compressFormat, destinationDirPath, sourceImage);
+        String destinationFilePath = FileUtils.getDestinationFilePath(compressFormat, outputDirPath, sourceImage);
 
         // Write the resized image to the new file
         Bitmap scaledBitmap = getScaledBitmap(targetLength, sourceImage);
