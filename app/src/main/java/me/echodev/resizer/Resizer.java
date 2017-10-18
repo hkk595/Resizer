@@ -12,7 +12,7 @@ import io.reactivex.Flowable;
 import me.echodev.resizer.util.ImageUtils;
 
 /**
- * Created by K.K. Ho on 1/9/2017.
+ * Created by K.K. Ho & HassanUsman on 1/9/2017.
  */
 
 public class Resizer {
