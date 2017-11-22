@@ -11,7 +11,7 @@ import java.io.IOException;
  */
 
 public class FileUtils {
-    public static String getDestinationFilePath(Bitmap.CompressFormat compressFormat, String outputDirPath, File sourceImage) {
+    public static String getOutputFilePath(Bitmap.CompressFormat compressFormat, String outputDirPath, File sourceImage) {
         String originalFileName = sourceImage.getName();
         String targetFileName;
         String targetFileExtension = "." + compressFormat.name().toLowerCase().replace("jpeg", "jpg");

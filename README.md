@@ -17,7 +17,7 @@ allprojects {
 2. Add the dependency in your module-level build.gradle
 ```groovy
 dependencies {
-    compile 'com.github.hkk595:Resizer:v1.2'
+    compile 'com.github.hkk595:Resizer:v1.3'
 }
 ```
 
@@ -40,7 +40,7 @@ Bitmap resizedImage = new Resizer(this)
 ```
 Note: You only need to specify the target length (in pixel) of the longer side of the image. Resizer will calculate the rest automatically.
 
-#### Using RxJava to get the resized image asynchronously
+#### Using RxJava 2 with RxAndroid to get the resized image asynchronously
 ```java
 final File[] resizedImage = new File[1];
 new Resizer(this)
@@ -87,7 +87,7 @@ new Resizer(this)
 Note: You don't need to declare the new image as final nor array if it is an instance variable of the class, instead of a local variable in a function.
 
 #### Library specification
-    Minimum SDK: API 21
+    Minimum SDK: API 16
      
     Default settings:
     targetLength: 1080

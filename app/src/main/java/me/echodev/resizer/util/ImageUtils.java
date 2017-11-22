@@ -18,13 +18,13 @@ public class ImageUtils {
         }
 
         // Prepare the new file name and path
-        String destinationFilePath = FileUtils.getDestinationFilePath(compressFormat, outputDirPath, sourceImage);
+        String outputFilePath = FileUtils.getOutputFilePath(compressFormat, outputDirPath, sourceImage);
 
         // Write the resized image to the new file
         Bitmap scaledBitmap = getScaledBitmap(targetLength, sourceImage);
-        FileUtils.writeBitmapToFile(scaledBitmap, compressFormat, quality, destinationFilePath);
+        FileUtils.writeBitmapToFile(scaledBitmap, compressFormat, quality, outputFilePath);
 
-        return new File(destinationFilePath);
+        return new File(outputFilePath);
     }
 
     public static Bitmap getScaledBitmap(int targetLength, File sourceImage) {
