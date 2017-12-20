@@ -65,6 +65,9 @@ public class Resizer {
         return this;
     }
 
+    /** Set output file name.
+     * @param filename name of the output file, without file extension
+     * */
     public Resizer setOutputFilename(String filename) {
 
         if (filename == null) {
