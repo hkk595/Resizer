@@ -6,6 +6,7 @@ import android.os.Environment;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Locale;
 import java.util.concurrent.Callable;
 
 import io.reactivex.Flowable;
@@ -19,6 +20,7 @@ public class Resizer {
     private int targetLength, quality;
     private Bitmap.CompressFormat compressFormat;
     private String outputDirPath;
+    private String outputFilename;
     private File sourceImage;
 
     public Resizer(Context context) {
@@ -26,6 +28,7 @@ public class Resizer {
         quality = 80;
         compressFormat = Bitmap.CompressFormat.JPEG;
         outputDirPath = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES).getAbsolutePath();
+        outputFilename = null;
     }
 
     public Resizer setTargetLength(int targetLength) {
@@ -53,6 +56,35 @@ public class Resizer {
         return this;
     }
 
+    public Resizer setOutputFormat(Bitmap.CompressFormat compressFormat) {
+        if (compressFormat == null) {
+            throw new NullPointerException("compressFormat null");
+        }
+
+        this.compressFormat = compressFormat;
+        return this;
+    }
+
+    /** Set output file name.
+     * @param filename name of the output file, without file extension
+     * */
+    public Resizer setOutputFilename(String filename) {
+
+        if (filename == null) {
+            throw new NullPointerException("filename null");
+        }
+
+        if (filename.toLowerCase(Locale.US).endsWith(".jpg")
+                || filename.toLowerCase(Locale.US).endsWith(".jpeg")
+                || filename.toLowerCase(Locale.US).endsWith(".png")
+                || filename.toLowerCase(Locale.US).endsWith(".webp")) {
+            throw new IllegalStateException("Filename should be provided without extension. See setOutputFormat(String).");
+        }
+
+        this.outputFilename = filename;
+        return this;
+    }
+
     public Resizer setOutputDirPath(String outputDirPath) {
         this.outputDirPath = outputDirPath;
         return this;
@@ -64,7 +96,8 @@ public class Resizer {
     }
 
     public File getResizedFile() throws IOException {
-        return ImageUtils.getScaledImage(targetLength, quality, compressFormat, outputDirPath, sourceImage);
+        return ImageUtils.getScaledImage(targetLength, quality, compressFormat, outputDirPath, outputFilename,
+                sourceImage);
     }
 
     public Bitmap getResizedBitmap() throws IOException {
