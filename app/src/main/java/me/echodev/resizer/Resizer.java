@@ -16,13 +16,19 @@ import me.echodev.resizer.util.ImageUtils;
  * Created by K.K. Ho on 1/9/2017.
  */
 
+/**
+ * An image resizing library for Android, which allows you to scale an image file to a smaller or bigger one while keeping the aspect ratio.
+ */
 public class Resizer {
     private int targetLength, quality;
     private Bitmap.CompressFormat compressFormat;
-    private String outputDirPath;
-    private String outputFilename;
+    private String outputDirPath, outputFilename;
     private File sourceImage;
 
+    /**
+     * The constructor to initialize Resizer instance.
+     * @param context The global application context. You can get it by getApplicationContext().
+     */
     public Resizer(Context context) {
         targetLength = 1080;
         quality = 80;
@@ -31,16 +37,31 @@ public class Resizer {
         outputFilename = null;
     }
 
+    /**
+     * Set the target length of the image. You only need to specify the target length of the longer side (or either side if it's a square). Resizer will calculate the rest automatically.
+     * @param targetLength The target image length in pixel. The default value is 1080.
+     * @return This Resizer instance, for chained settings.
+     */
     public Resizer setTargetLength(int targetLength) {
         this.targetLength = targetLength;
         return this;
     }
 
+    /**
+     * Set the image quality. The higher value, the better image quality but larger file size. PNG, which is a lossless format, will ignore the quality setting.
+     * @param quality The image quality value, ranges from 0 to 100. The default value is 80.
+     * @return This Resizer instance, for chained settings.
+     */
     public Resizer setQuality(int quality) {
         this.quality = quality;
         return this;
     }
 
+    /**
+     * Set the image compression format by String.
+     * @param outputFormat The compression format. The default format is JPEG.
+     * @return This Resizer instance, for chained settings.
+     */
     public Resizer setOutputFormat(String outputFormat) {
         switch (outputFormat) {
             case "JPEG":
@@ -56,6 +77,11 @@ public class Resizer {
         return this;
     }
 
+    /**
+     * Set the image compression format by Bitmap.CompressFormat.
+     * @param compressFormat The compression format. The default format is JPEG.
+     * @return This Resizer instance, for chained settings.
+     */
     public Resizer setOutputFormat(Bitmap.CompressFormat compressFormat) {
         if (compressFormat == null) {
             throw new NullPointerException("compressFormat null");
@@ -65,11 +91,12 @@ public class Resizer {
         return this;
     }
 
-    /** Set output file name.
-     * @param filename name of the output file, without file extension
-     * */
+    /**
+     * Set the output file name. If you don't set it, the output file will have the same name as the source file.
+     * @param filename The name of the output file, without file extension.
+     * @return This Resizer instance, for chained settings.
+     */
     public Resizer setOutputFilename(String filename) {
-
         if (filename == null) {
             throw new NullPointerException("filename null");
         }
@@ -85,25 +112,49 @@ public class Resizer {
         return this;
     }
 
+    /**
+     * Set the output directory path. If this is the same as where the source image locates, the source image can be overwritten.
+     * @param outputDirPath The path of the output directory. The default path is the external files directory of your app
+     * @return This Resizer instance, for chained settings.
+     */
     public Resizer setOutputDirPath(String outputDirPath) {
         this.outputDirPath = outputDirPath;
         return this;
     }
 
+    /**
+     * Set the source image file.
+     * @param sourceImage The source image file to be resized.
+     * @return This Resizer instance, for chained settings.
+     */
     public Resizer setSourceImage(File sourceImage) {
         this.sourceImage = sourceImage;
         return this;
     }
 
+    /**
+     * Get the resized image file.
+     * @return The resized image file.
+     * @throws IOException
+     */
     public File getResizedFile() throws IOException {
         return ImageUtils.getScaledImage(targetLength, quality, compressFormat, outputDirPath, outputFilename,
                 sourceImage);
     }
 
+    /**
+     * Get the resized image bitmap.
+     * @return The resized image bitmap.
+     * @throws IOException
+     */
     public Bitmap getResizedBitmap() throws IOException {
         return ImageUtils.getScaledBitmap(targetLength, sourceImage);
     }
 
+    /**
+     * Get the resized image file as RxJava Flowable.
+     * @return A Flowable that emits the resized image file or error.
+     */
     public Flowable<File> getResizedFileAsFlowable() {
         return Flowable.defer(new Callable<Flowable<File>>() {
             @Override
@@ -117,6 +168,10 @@ public class Resizer {
         });
     }
 
+    /**
+     * Get the resized image bitmap as RxJava Flowable.
+     * @return A Flowable that emits the resized image bitmap or error.
+     */
     public Flowable<Bitmap> getResizedBitmapAsFlowable() {
         return Flowable.defer(new Callable<Flowable<Bitmap>>() {
             @Override

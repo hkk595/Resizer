@@ -17,7 +17,7 @@ allprojects {
 2. Add the dependency in your module-level build.gradle
 ```groovy
 dependencies {
-    compile 'com.github.hkk595:Resizer:v1.3'
+    compile 'com.github.hkk595:Resizer:v1.4'
 }
 ```
 
@@ -27,6 +27,7 @@ File resizedImage = new Resizer(this)
         .setTargetLength(1080)
         .setQuality(80)
         .setOutputFormat("JPEG")
+        .setOutputFilename("resized_image")
         .setOutputDirPath(storagePath)
         .setSourceImage(originalImage)
         .getResizedFile();
@@ -38,7 +39,7 @@ Bitmap resizedImage = new Resizer(this)
         .setSourceImage(originalImage)
         .getResizedBitmap();
 ```
-Note: You only need to specify the target length (in pixel) of the longer side of the image. Resizer will calculate the rest automatically.
+Note: You only need to specify the target length (in pixel) of the longer side (or either side if it's a square) of the image. Resizer will calculate the rest automatically.
 
 #### Using RxJava 2 with RxAndroid to get the resized image asynchronously
 ```java
@@ -47,6 +48,7 @@ new Resizer(this)
         .setTargetLength(1080)
         .setQuality(80)
         .setOutputFormat("JPEG")
+        .setOutputFilename("resized_image")
         .setOutputDirPath(storagePath)
         .setSourceImage(originalImage)
         .getResizedFileAsFlowable()
@@ -84,7 +86,9 @@ new Resizer(this)
             }
         });
 ```
-Note: You don't need to declare the new image as final nor array if it is an instance variable of the class, instead of a local variable in a function.
+Note: You don't need to declare the new image as final nor array if it's an instance variable of the class, instead of a local variable in a function.
+
+#### Refer to the [JavaDoc](https://hkk595.github.io/Resizer) for more details.
 
 #### Library specification
     Minimum SDK: API 16
@@ -93,6 +97,7 @@ Note: You don't need to declare the new image as final nor array if it is an ins
     targetLength: 1080
     quality: 80
     outputFormat: JPEG
+    outputFilename: same as the source file
     outputDirPath: the external files directory of your app
      
     Supported input formats:
