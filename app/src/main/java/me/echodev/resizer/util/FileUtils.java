@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Locale;
 
 /**
  * Created by K.K. Ho on 3/9/2017.
@@ -14,7 +15,7 @@ public class FileUtils {
     public static String getOutputFilePath(Bitmap.CompressFormat compressFormat, String outputDirPath, String outputFilename, File sourceImage) {
         String originalFileName = sourceImage.getName();
         String targetFileName;
-        String targetFileExtension = "." + compressFormat.name().toLowerCase().replace("jpeg", "jpg");
+        String targetFileExtension = "." + compressFormat.name().toLowerCase(Locale.US).replace("jpeg", "jpg");
 
         if (outputFilename == null) {
             int extensionIndex = originalFileName.lastIndexOf('.');

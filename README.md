@@ -17,7 +17,7 @@ allprojects {
 2. Add the dependency in your module-level build.gradle
 ```groovy
 dependencies {
-    compile 'com.github.hkk595:Resizer:v1.4'
+    compile 'com.github.hkk595:Resizer:v1.5'
 }
 ```
 

@@ -43,7 +43,7 @@ public class Resizer {
      * @return This Resizer instance, for chained settings.
      */
     public Resizer setTargetLength(int targetLength) {
-        this.targetLength = targetLength;
+        this.targetLength = (targetLength < 0) ? 0 : targetLength;
         return this;
     }
 
@@ -53,7 +53,13 @@ public class Resizer {
      * @return This Resizer instance, for chained settings.
      */
     public Resizer setQuality(int quality) {
-        this.quality = quality;
+        if (quality < 0) {
+            this.quality = 0;
+        } else if (quality > 100) {
+            this.quality = 100;
+        } else {
+            this.quality = quality;
+        }
         return this;
     }
 
@@ -72,6 +78,8 @@ public class Resizer {
                 break;
             case "WEBP":
                 this.compressFormat = Bitmap.CompressFormat.WEBP;
+                break;
+            default:
                 break;
         }
         return this;
