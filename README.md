@@ -1,5 +1,5 @@
 # Resizer
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Resizer-green.svg?style=flat)](https://android-arsenal.com/details/1/6155) [![](https://jitpack.io/v/hkk595/Resizer.svg)](https://jitpack.io/#hkk595/Resizer)
+[![](https://jitpack.io/v/iamdeveloper-lopez/Resizer.svg)](https://jitpack.io/#iamdeveloper-lopez/Resizer)
 
 <p align="center"><img width="50%" height="auto" src="https://raw.githubusercontent.com/hkk595/Resizer/master/app/src/main/res/drawable/library_logo.png"/></p>
 
@@ -17,7 +17,7 @@ allprojects {
 2. Add the dependency in your module-level build.gradle
 ```groovy
 dependencies {
-    compile 'com.github.hkk595:Resizer:v1.5'
+    implementation 'com.github.iamdeveloper-lopez:Resizer:v1.6'
 }
 ```
 
@@ -88,8 +88,6 @@ new Resizer(this)
 ```
 Note: You don't need to declare the new image as final nor array if it's an instance variable of the class, instead of a local variable in a function.
 
-#### Refer to the [JavaDoc](https://hkk595.github.io/Resizer) for more details.
-
 #### Library specification
     Minimum SDK: API 16
      
@@ -119,7 +117,7 @@ Note: You don't need to declare the new image as final nor array if it's an inst
 ## License
     MIT License
      
-    Copyright (c) 2017 K.K. Ho
+    Copyright (c) 2018 L.L.
      
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
