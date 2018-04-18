@@ -1,5 +1,6 @@
 package me.echodev.resizer;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Environment;
@@ -24,12 +25,14 @@ public class Resizer {
     private Bitmap.CompressFormat compressFormat;
     private String outputDirPath, outputFilename;
     private File sourceImage;
+    private Activity context;
 
     /**
      * The constructor to initialize Resizer instance.
      * @param context The global application context. You can get it by getApplicationContext().
      */
-    public Resizer(Context context) {
+    public Resizer(Activity context) {
+        this.context = context;
         targetLength = 1080;
         quality = 80;
         compressFormat = Bitmap.CompressFormat.JPEG;
@@ -146,7 +149,7 @@ public class Resizer {
      * @throws IOException
      */
     public File getResizedFile() throws IOException {
-        return ImageUtils.getScaledImage(targetLength, quality, compressFormat, outputDirPath, outputFilename,
+        return ImageUtils.getScaledImage(context, targetLength, quality, compressFormat, outputDirPath, outputFilename,
                 sourceImage);
     }
 
@@ -156,7 +159,7 @@ public class Resizer {
      * @throws IOException
      */
     public Bitmap getResizedBitmap() throws IOException {
-        return ImageUtils.getScaledBitmap(targetLength, sourceImage);
+        return ImageUtils.getScaledBitmap(context, targetLength, sourceImage);
     }
 
     /**
