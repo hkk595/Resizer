@@ -11,7 +11,7 @@ import java.io.IOException;
  */
 
 public class ImageUtils {
-    public static File getScaledImage(int targetLength, int targetWidth int quality, Bitmap.CompressFormat compressFormat,
+    public static File getScaledImage(int targetLength, int targetWidth, int quality, Bitmap.CompressFormat compressFormat,
             String outputDirPath, String outputFilename, File sourceImage) throws IOException {
         File directory = new File(outputDirPath);
         if (!directory.exists()) {
