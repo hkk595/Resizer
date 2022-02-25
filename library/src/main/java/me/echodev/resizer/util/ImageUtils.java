@@ -2,6 +2,8 @@ package me.echodev.resizer.util;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,7 +14,7 @@ import java.io.IOException;
 
 public class ImageUtils {
     public static File getScaledImage(int targetLength, int quality, Bitmap.CompressFormat compressFormat,
-            String outputDirPath, String outputFilename, File sourceImage) throws IOException {
+                                      String outputDirPath, String outputFilename, File sourceImage) throws IOException {
         File directory = new File(outputDirPath);
         if (!directory.exists()) {
             directory.mkdirs();
@@ -28,7 +30,7 @@ public class ImageUtils {
         return new File(outputFilePath);
     }
 
-    public static Bitmap getScaledBitmap(int targetLength, File sourceImage) {
+    public static Bitmap getScaledBitmap(int targetLength, File sourceImage) throws IOException {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = false;
         Bitmap bitmap = BitmapFactory.decodeFile(sourceImage.getAbsolutePath(), options);
@@ -50,6 +52,20 @@ public class ImageUtils {
             targetWidth = Math.round(targetHeight / aspectRatio);
         }
 
-        return Bitmap.createScaledBitmap(bitmap, targetWidth, targetHeight, true);
+        Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, targetWidth, targetHeight, true);
+
+        //check the rotation of the image and display it properly
+        ExifInterface exif;
+        exif = new ExifInterface(sourceImage.getAbsolutePath());
+        int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, 0);
+        Matrix matrix = new Matrix();
+        if (orientation == 6) {
+            matrix.postRotate(90);
+        } else if (orientation == 3) {
+            matrix.postRotate(180);
+        } else if (orientation == 8) {
+            matrix.postRotate(270);
+        }
+        return Bitmap.createBitmap(scaledBitmap, 0, 0, scaledBitmap.getWidth(), scaledBitmap.getHeight(), matrix, true);
     }
 }
